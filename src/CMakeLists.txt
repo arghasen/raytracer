@@ -9,3 +9,7 @@ target_compile_features(libraytracer PUBLIC cxx_std_17)
 
 add_executable(raytracer main.cpp)
 target_link_libraries(raytracer PRIVATE libraytracer)
+
+install(
+    TARGETS raytracer
+    RUNTIME DESTINATION bin)

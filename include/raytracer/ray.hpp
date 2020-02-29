@@ -21,11 +21,24 @@ private:
     Vec3d<T> m_direction;
 };
 
+/**
+ * @brief Origin of the ray.
+ * 
+ * @tparam T 
+ * @return Vec3d<T> A vector representing the origin of the ray.
+ */
 template<typename T>
 Vec3d<T> Ray3d<T>::origin() const
 {
     return m_origin;
 }
+
+/**
+ * @brief Direction of the ray.
+ * 
+ * @tparam T 
+ * @return Vec3d<T> A vector representing the direction of the ray.
+ */
 
 template<typename T>
 Vec3d<T> Ray3d<T>::direction() const
