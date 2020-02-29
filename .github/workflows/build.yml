@@ -13,5 +13,6 @@ jobs:
 
   test:
     name: test
+    runs-on: ubuntu-latest
     steps:
-      - ls -la .
+      - run: ls -la .
