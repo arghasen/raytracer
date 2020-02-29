@@ -109,6 +109,22 @@ public:
      */
     template <typename U>
     Vec3d operator/(U f) const;
+
+    /**
+     * @brief equality of two vectors
+     * 
+     * @param u a vector to compare against
+     * @return bool
+     */
+    bool operator==(const Vec3d &u) const;
+
+    /**
+     * @brief inequality of two vectors
+     * 
+     * @param u a vector to compare against
+     * @return bool
+     */
+    bool operator!=(const Vec3d &u) const;
 };
 
 template <typename T>
@@ -185,6 +201,18 @@ Vec3d<T> Vec3d<T>::operator/(U f) const
     res.m_data[1] = m_data[1] / f;
     res.m_data[2] = m_data[2] / f;
     return res;
+}
+
+template <typename T>
+bool Vec3d<T>::operator==(const Vec3d &u) const
+{
+    return this->x() == u.x() && this->y() == u.y() && this->z() ==u.z();
+}
+
+template <typename T>
+bool Vec3d<T>::operator!=(const Vec3d &u) const
+{
+    return !(*this == u);
 }
 
 } // namespace utils

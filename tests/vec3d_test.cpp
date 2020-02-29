@@ -99,3 +99,13 @@ TEST_CASE("Divide vector with scalar", "[vec3d]")
     REQUIRE(c.y() == 1);
     REQUIRE(c.z() == 1);
 }
+
+TEST_CASE("Equality of vectors", "[vec3d]")
+{
+    raytracer::utils::Vec3d<int> v(2, 2, 2);
+    raytracer::utils::Vec3d<int> u(3, 3, 3);
+    raytracer::utils::Vec3d<int> r(2, 2, 2);
+
+    REQUIRE(v == r);
+    REQUIRE(u != r);
+}
