@@ -3,9 +3,19 @@
 #include <catch2/catch.hpp>
 
 using namespace raytracer::utils;
-TEST_CASE("create empty ray","[Ray]")
+TEST_CASE("create empty ray", "[Ray]")
 {
-    Ray<float> tr;
+    Ray3d<float> tr;
     REQUIRE(tr.origin() == Vec3d<float>{0,0,0});
     REQUIRE(tr.direction() == Vec3d<float>{0,0,0});
+}
+
+TEST_CASE("create ray with origin and direction", "[Ray]")
+{
+    auto origin = Vec3d<float>{0,0,0};
+    auto direction = Vec3d<float>{1,1,1};
+    Ray3d<float> tr{origin, direction};
+    
+    REQUIRE(tr.origin() == origin);
+    REQUIRE(tr.direction() == direction);
 }

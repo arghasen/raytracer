@@ -7,11 +7,11 @@ namespace raytracer
 namespace utils
 {
 template <typename T>
-class Ray
+class Ray3d
 {
 public:
-    Ray() = default;
-    Ray(const Vec3d<T>& origin, const Vec3d<T> &direction);
+    Ray3d() = default;
+    Ray3d(const Vec3d<T>& origin, const Vec3d<T> &direction);
 
     Vec3d<T> origin() const;
     Vec3d<T> direction() const;
@@ -22,16 +22,22 @@ private:
 };
 
 template<typename T>
-Vec3d<T> Ray<T>::origin() const
+Vec3d<T> Ray3d<T>::origin() const
 {
     return m_origin;
 }
 
 template<typename T>
-Vec3d<T> Ray<T>::direction() const
+Vec3d<T> Ray3d<T>::direction() const
 {
     return m_direction;
 }
+
+template<typename T>
+Ray3d<T>::Ray3d(const Vec3d<T>& origin, const Vec3d<T> &direction) : 
+    m_origin(origin),
+    m_direction(direction)
+{}
 
 } // namespace utils    
 } // namespace raytracer

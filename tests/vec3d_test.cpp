@@ -109,3 +109,10 @@ TEST_CASE("Equality of vectors", "[vec3d]")
     REQUIRE(v == r);
     REQUIRE(u != r);
 }
+
+TEST_CASE("Unit Vector","[vec3d]")
+{
+    raytracer::utils::Vec3d<float> v(1,1,1);
+    auto c = unit_vector(v);
+    REQUIRE(c.length() == Approx(1) );
+}
