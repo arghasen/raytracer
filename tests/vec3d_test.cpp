@@ -32,7 +32,6 @@ TEST_CASE("Non Zero Vectors have non zero length", "[vec3d]")
 
 TEST_CASE("Add two vectors", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<int> v(1, 1, 1);
     raytracer::utils::Vec3d<int> u(1, 1, 1);
     auto c = u + v;
@@ -43,7 +42,6 @@ TEST_CASE("Add two vectors", "[vec3d]")
 
 TEST_CASE("subtract two vectors", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<int> v(4, 4, 4);
     raytracer::utils::Vec3d<int> u(1, 1, 1);
     SECTION("a-b")
@@ -65,7 +63,6 @@ TEST_CASE("subtract two vectors", "[vec3d]")
 
 TEST_CASE("Multiply two vectors", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<int> v(2, 2, 2);
     raytracer::utils::Vec3d<int> u(3, 3, 3);
     auto c = u * v;
@@ -73,9 +70,9 @@ TEST_CASE("Multiply two vectors", "[vec3d]")
     REQUIRE(c.y() == 6);
     REQUIRE(c.z() == 6);
 }
+
 TEST_CASE("Divide two vectors", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<float> v(2, 2, 2);
     raytracer::utils::Vec3d<float> u(3, 3, 3);
     auto c = u / v;
@@ -85,7 +82,6 @@ TEST_CASE("Divide two vectors", "[vec3d]")
 }
 TEST_CASE("Multiply vector with scalar", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<int> v(2, 2, 2);
 
     auto c = v*2;
@@ -96,7 +92,6 @@ TEST_CASE("Multiply vector with scalar", "[vec3d]")
 
 TEST_CASE("Divide vector with scalar", "[vec3d]")
 {
-
     raytracer::utils::Vec3d<int> v(2, 2, 2);
 
     auto c =  v/2;

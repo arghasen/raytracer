@@ -1,3 +1,5 @@
+#pragma once
+
 #include <array>
 #include <cmath>
 
@@ -20,7 +22,7 @@ private:
 public:
     /// Default Constructor creates 0 initalized 3d vector.
     Vec3d() = default;
-    
+
     /**
      * @brief Construct a new Vec 3d object
      * 
@@ -96,7 +98,7 @@ public:
      * @param f a scalar value.
      * @return Vec3d a new vector with the result of the scalar multiplication of the vector.
      */
-    template<typename U>
+    template <typename U>
     Vec3d operator*(U f) const;
 
     /**
@@ -105,7 +107,7 @@ public:
      * @param f a scalar value.
      * @return Vec3d a new vector with the result of the scalar division of the vector.
      */
-    template<typename U>
+    template <typename U>
     Vec3d operator/(U f) const;
 };
 
@@ -133,7 +135,7 @@ Vec3d<T> Vec3d<T>::operator+(const Vec3d &u) const
     return res;
 }
 
-template<typename T>
+template <typename T>
 Vec3d<T> Vec3d<T>::operator-(const Vec3d &u) const
 {
     Vec3d<T> res;
@@ -143,7 +145,7 @@ Vec3d<T> Vec3d<T>::operator-(const Vec3d &u) const
     return res;
 }
 
-template<typename T>
+template <typename T>
 Vec3d<T> Vec3d<T>::operator*(const Vec3d &u) const
 {
     Vec3d<T> res;
@@ -153,7 +155,7 @@ Vec3d<T> Vec3d<T>::operator*(const Vec3d &u) const
     return res;
 }
 
-template<typename T>
+template <typename T>
 Vec3d<T> Vec3d<T>::operator/(const Vec3d &u) const
 {
     Vec3d<T> res;
@@ -163,8 +165,8 @@ Vec3d<T> Vec3d<T>::operator/(const Vec3d &u) const
     return res;
 }
 
-template<typename T>
-template<typename U>
+template <typename T>
+template <typename U>
 Vec3d<T> Vec3d<T>::operator*(U f) const
 {
     Vec3d<T> res;
@@ -174,8 +176,8 @@ Vec3d<T> Vec3d<T>::operator*(U f) const
     return res;
 }
 
-template<typename T>
-template<typename U>
+template <typename T>
+template <typename U>
 Vec3d<T> Vec3d<T>::operator/(U f) const
 {
     Vec3d<T> res;
