@@ -1,7 +1,10 @@
-add_executable(testrunner testrunner.cpp)
+set(TEST_SOURCES vec3d_test.cpp)
+add_executable(testrunner testrunner.cpp ${TEST_SOURCES})
 target_include_directories(testrunner PRIVATE 
             ${PROJECT_SOURCE_DIR}/include
             ${PROJECT_SOURCE_DIR}/extern
 )
 target_link_libraries(testrunner PRIVATE libraytracer)
 target_compile_features(testrunner PRIVATE cxx_std_17)
+
+add_test(Name testrunner COMMAND testrunner)
