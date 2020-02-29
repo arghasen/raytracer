@@ -30,28 +30,29 @@ public:
      * @param y  the y coordinate
      * @param z  the z coordinate
      */
-    Vec3d(T x, T y, T z);
+    constexpr Vec3d(T x, T y, T z);
 
     /**
      * @brief return the x coordinate.
      * 
      * @return T 
      */
-    inline T x() const { return m_data[0]; }
+    constexpr inline T x() const { return m_data[0]; }
 
     /**
      * @brief return the y coordinate.
      * 
      * @return T 
      */
-    inline T y() const { return m_data[1]; }
+    constexpr inline T y() const { return m_data[1]; }
+
 
     /**
      * @brief return the z coordinate.
      * 
      * @return T 
      */
-    inline T z() const { return m_data[2]; }
+   constexpr inline T z() const { return m_data[2]; }
 
     /**
      * @brief length of the vector.
@@ -66,7 +67,7 @@ public:
      * @param u  a vector
      * @return Vec3d a new vector with the result of the addition of the 2 vectors.  
      */
-    Vec3d operator+(const Vec3d &u) const;
+    constexpr Vec3d operator+(const Vec3d &u) const;
 
     /**
      * @brief subtract two vectors.
@@ -74,7 +75,7 @@ public:
      * @param u a vector.
      * @return Vec3d a new vector with the result of the subtraction of the 2 vectors.
      */
-    Vec3d operator-(const Vec3d &u) const;
+    constexpr Vec3d operator-(const Vec3d &u) const;
 
     /**
      * @brief multiplication of two vectors
@@ -82,7 +83,7 @@ public:
      * @param u a vector.
      * @return Vec3d a new vector with the result of the multiplication of the 2 vectors.
      */
-    Vec3d operator*(const Vec3d &u) const;
+    constexpr Vec3d operator*(const Vec3d &u) const;
 
     /**
      * @brief division of two vectors
@@ -90,7 +91,7 @@ public:
      * @param u a vector.
      * @return Vec3d a new vector with the result of the division of the 2 vectors.
      */
-    Vec3d operator/(const Vec3d &u) const;
+    constexpr Vec3d operator/(const Vec3d &u) const;
 
     /**
      * @brief scalar multiplication of a vector.
@@ -99,7 +100,7 @@ public:
      * @return Vec3d a new vector with the result of the scalar multiplication of the vector.
      */
     template <typename U>
-    Vec3d operator*(U f) const;
+    constexpr Vec3d operator*(U f) const;
 
     /**
      * @brief scalar division of a vector.
@@ -108,7 +109,7 @@ public:
      * @return Vec3d a new vector with the result of the scalar division of the vector.
      */
     template <typename U>
-    Vec3d operator/(U f) const;
+    constexpr Vec3d operator/(U f) const;
 
     /**
      * @brief equality of two vectors
@@ -116,7 +117,7 @@ public:
      * @param u a vector to compare against
      * @return bool
      */
-    bool operator==(const Vec3d &u) const;
+    constexpr bool operator==(const Vec3d &u) const;
 
     /**
      * @brief inequality of two vectors
@@ -124,11 +125,11 @@ public:
      * @param u a vector to compare against
      * @return bool
      */
-    bool operator!=(const Vec3d &u) const;
+    constexpr bool operator!=(const Vec3d &u) const;
 };
 
 template <typename T>
-Vec3d<T>::Vec3d(T x, T y, T z)
+constexpr Vec3d<T>::Vec3d(T x, T y, T z)
 {
     m_data[0] = x;
     m_data[1] = y;
@@ -142,7 +143,7 @@ double Vec3d<T>::length() const
 }
 
 template <typename T>
-Vec3d<T> Vec3d<T>::operator+(const Vec3d &u) const
+constexpr Vec3d<T> Vec3d<T>::operator+(const Vec3d &u) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] + u.x();
@@ -152,7 +153,7 @@ Vec3d<T> Vec3d<T>::operator+(const Vec3d &u) const
 }
 
 template <typename T>
-Vec3d<T> Vec3d<T>::operator-(const Vec3d &u) const
+constexpr Vec3d<T> Vec3d<T>::operator-(const Vec3d &u) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] - u.x();
@@ -162,7 +163,7 @@ Vec3d<T> Vec3d<T>::operator-(const Vec3d &u) const
 }
 
 template <typename T>
-Vec3d<T> Vec3d<T>::operator*(const Vec3d &u) const
+constexpr Vec3d<T> Vec3d<T>::operator*(const Vec3d &u) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] * u.x();
@@ -172,7 +173,7 @@ Vec3d<T> Vec3d<T>::operator*(const Vec3d &u) const
 }
 
 template <typename T>
-Vec3d<T> Vec3d<T>::operator/(const Vec3d &u) const
+constexpr Vec3d<T> Vec3d<T>::operator/(const Vec3d &u) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] / u.x();
@@ -183,7 +184,7 @@ Vec3d<T> Vec3d<T>::operator/(const Vec3d &u) const
 
 template <typename T>
 template <typename U>
-Vec3d<T> Vec3d<T>::operator*(U f) const
+constexpr Vec3d<T> Vec3d<T>::operator*(U f) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] * f;
@@ -194,7 +195,7 @@ Vec3d<T> Vec3d<T>::operator*(U f) const
 
 template <typename T>
 template <typename U>
-Vec3d<T> Vec3d<T>::operator/(U f) const
+constexpr Vec3d<T> Vec3d<T>::operator/(U f) const
 {
     Vec3d<T> res;
     res.m_data[0] = m_data[0] / f;
@@ -204,16 +205,21 @@ Vec3d<T> Vec3d<T>::operator/(U f) const
 }
 
 template <typename T>
-bool Vec3d<T>::operator==(const Vec3d &u) const
+constexpr bool Vec3d<T>::operator==(const Vec3d &u) const
 {
     return this->x() == u.x() && this->y() == u.y() && this->z() ==u.z();
 }
 
 template <typename T>
-bool Vec3d<T>::operator!=(const Vec3d &u) const
+constexpr bool Vec3d<T>::operator!=(const Vec3d &u) const
 {
     return !(*this == u);
 }
 
+template<typename T> 
+Vec3d<T> unit_vector(const Vec3d<T>& v)
+{
+    return v/v.length();
+}
 } // namespace utils
 } // namespace raytracer
