@@ -3,6 +3,8 @@
 [![codecov](https://codecov.io/gh/arghasen/raytracer/branch/master/graph/badge.svg)](https://codecov.io/gh/arghasen/raytracer)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 
+https://arghasen.github.io/raytracer/
+
 Inspired by Peter Shirley's Ray Tracing in One Weekend. 
 ## Motivation
 To learn about raytracing and hopefully learn some graphics programming.
