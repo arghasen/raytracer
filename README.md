@@ -1,7 +1,13 @@
 # Raytracer
 [![Build Status](https://travis-ci.com/arghasen/raytracer.svg?branch=master)](https://travis-ci.com/arghasen/raytracer)
+[![codecov](https://codecov.io/gh/arghasen/raytracer/branch/master/graph/badge.svg)](https://codecov.io/gh/arghasen/raytracer)
 
 Inspired by Peter Shirley's Ray Tracing in One Weekend. 
 ## Motivation
 To learn about raytracing and hopefully learn some graphics programming.
+### Secondary Motivation
+Use best practices and produce production grade software.
+
+## Continuous Integration
+CI on Travis CI and Coverage on CodeCov
 
