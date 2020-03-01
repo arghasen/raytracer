@@ -15,11 +15,13 @@ Use best practices and produce production grade software.
 CI on Travis CI and Coverage on CodeCov
 
 # Todo:
-    - Add multiple spheres.
+    - Colorful spheres
+    - Cameras
 
 # Completed Tasks:
     - Vector Representation
     - Ray Representation
-    - Build a small image
+    - Build a small image ( v0.1)
     - Add a sphere
+    - Add multiple spheres. (v0.2)
 

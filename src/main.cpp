@@ -2,6 +2,7 @@
 #include "raytracer/ray.hpp"
 #include "raytracer/color.hpp"
 #include "raytracer/shape.hpp"
+#include "raytracer/shape_list.hpp"
 
 #include <iostream>
 
@@ -33,7 +34,13 @@ int main(int, char **)
     std::cout << nx << " " << ny << std::endl;
     std::cout << "255" << std::endl;
 
-    Sphere s{Vec{0,0,-1},0.5};
+    std::vector<std::shared_ptr<Shape<float>>> shapes;
+    shapes.push_back(std::make_shared<Sphere3d<float>>(Vec3d<float>(0.0f, 0.0f, -100.0f), 10));
+    shapes.push_back(std::make_shared<Sphere3d<float>>(Vec3d<float>(50.0f, 50.0f, -100.0f), 10));
+    shapes.push_back(std::make_shared<Sphere3d<float>>(Vec3d<float>(-50.0f, -50.0f, -100.0f), 10));
+    
+
+    ShapeList3d<float> shapesList(shapes);
 
     for (int j = ny - 1; j >= 0; j--)
     {
@@ -43,7 +50,7 @@ int main(int, char **)
             float v = float(j) / float(ny);
             Ray r{origin, lower_left_corner + horizonal * u + vertical * v};
             Vec col = getColor(r, Blue, Red);
-            if(s.hit(r, 0, 0))
+            if(shapesList.hit(r, 0, 0))
                 col = Vec(0,0,0);
             std::cout << int(255 *col.x()) <<" "<< int(255 *col.y()) << " "
                       << int(255 *col.z()) << std::endl;
