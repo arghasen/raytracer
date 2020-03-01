@@ -67,7 +67,14 @@ public:
      */
     constexpr T radius() const;
 
-    bool hit(const utils::Ray3d<T> &r, T t_min, T t_max) const override;
+    /**
+     * @brief Get the normal of the sphere.
+     * 
+     * @return Vec3d<T> Normal of the sphere.
+     */
+    constexpr utils::Vec3d<T> normal()const;
+
+    bool hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const override;
 };
 
 template<typename T>
@@ -85,5 +92,10 @@ constexpr T Sphere<T>::radius() const
 {
     return m_radius;
 }
-
+template <typename T>
+bool Sphere<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
+{
+    auto originToCenter = ray.origin() - m_center;
+    return false;
+}
 } // namespace raytracer::shape

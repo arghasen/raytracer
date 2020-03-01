@@ -2,6 +2,7 @@
 
 #include <array>
 #include <cmath>
+#include <ostream>
 
 namespace raytracer
 {
@@ -46,13 +47,12 @@ public:
      */
     constexpr inline T y() const { return m_data[1]; }
 
-
     /**
      * @brief return the z coordinate.
      * 
      * @return T 
      */
-   constexpr inline T z() const { return m_data[2]; }
+    constexpr inline T z() const { return m_data[2]; }
 
     /**
      * @brief length of the vector.
@@ -207,7 +207,7 @@ constexpr Vec3d<T> Vec3d<T>::operator/(U f) const
 template <typename T>
 constexpr bool Vec3d<T>::operator==(const Vec3d &u) const
 {
-    return this->x() == u.x() && this->y() == u.y() && this->z() ==u.z();
+    return this->x() == u.x() && this->y() == u.y() && this->z() == u.z();
 }
 
 template <typename T>
@@ -216,10 +216,47 @@ constexpr bool Vec3d<T>::operator!=(const Vec3d &u) const
     return !(*this == u);
 }
 
-template<typename T> 
-Vec3d<T> unit_vector(const Vec3d<T>& v)
+/**
+ * @brief Unit vector of a vector.
+ * 
+ * @tparam T 
+ * @param v 
+ * @return Vec3d<T> 
+ */
+template <typename T>
+Vec3d<T> unit_vector(const Vec3d<T> &v)
 {
-    return v/v.length();
+    return v / v.length();
+}
+
+/**
+ * @brief Dot product of 2 vectors
+ * 
+ * @tparam T 
+ * @param v First Vector.
+ * @param u Second Vector.
+ * @return T the dot product value.
+ */
+template <typename T>
+T dot(const Vec3d<T> &v, const Vec3d<T> &u)
+{
+    return v.x() * u.x() + v.y() * u.y() + v.z() * u.z();
+}
+
+template <typename T>
+Vec3d<T> cross(const Vec3d<T> &u,const Vec3d<T> &v)
+{
+    return Vec3d<T>{
+        (u.y()*v.z() - u.z()*v.y()),
+        (-(u.x()*v.z()-u.z()*v.x())),
+        (u.x()*v.y()-u.y()*v.x())
+    };
+}
+template<typename T>
+inline std::ostream& operator<<(std::ostream&os, const Vec3d<T>& t)
+{
+    os<<"("<<t.x()<<", "<<t.y()<<", "<<t.z()<<")";
+    return os;
 }
 } // namespace utils
 } // namespace raytracer

@@ -84,7 +84,7 @@ TEST_CASE("Multiply vector with scalar", "[vec3d]")
 {
     raytracer::utils::Vec3d<int> v(2, 2, 2);
 
-    auto c = v*2;
+    auto c = v * 2;
     REQUIRE(c.x() == 4);
     REQUIRE(c.y() == 4);
     REQUIRE(c.z() == 4);
@@ -94,7 +94,7 @@ TEST_CASE("Divide vector with scalar", "[vec3d]")
 {
     raytracer::utils::Vec3d<int> v(2, 2, 2);
 
-    auto c =  v/2;
+    auto c = v / 2;
     REQUIRE(c.x() == 1);
     REQUIRE(c.y() == 1);
     REQUIRE(c.z() == 1);
@@ -110,9 +110,33 @@ TEST_CASE("Equality of vectors", "[vec3d]")
     REQUIRE(u != r);
 }
 
-TEST_CASE("Unit Vector","[vec3d]")
+TEST_CASE("Unit Vector", "[vec3d]")
 {
-    raytracer::utils::Vec3d<float> v(1,1,1);
+    raytracer::utils::Vec3d<float> v(1, 1, 1);
     auto c = unit_vector(v);
-    REQUIRE(c.length() == Approx(1) );
+    REQUIRE(c.length() == Approx(1));
+}
+
+TEST_CASE("Dot product of 2 vectors", "[vec3d]")
+{
+    raytracer::utils::Vec3d<float> v(2, 3, 4);
+    raytracer::utils::Vec3d<float> u(5, 6, 7);
+    raytracer::utils::Vec3d<float> r(1, 1, 1);
+    raytracer::utils::Vec3d<float> s(1, 2, 3);
+
+    REQUIRE(dot(v, u) == 56);
+    REQUIRE(dot(v, r) == 9);
+    REQUIRE(dot(v, s) == 20);
+    REQUIRE(dot(u, r) == 18);
+}
+
+TEST_CASE("Cross product of 2 vectors", "[vec3d]")
+{
+    raytracer::utils::Vec3d<float> v(2, 3, 4);
+    raytracer::utils::Vec3d<float> u(5, 6, 7);
+    raytracer::utils::Vec3d<float> r(1, 1, 1);
+
+    REQUIRE(raytracer::utils::cross(v, u) == raytracer::utils::Vec3d<float>{-3, 6, -3});
+    REQUIRE(raytracer::utils::cross(v, r) == raytracer::utils::Vec3d<float>{-1, 2, -1});
+    REQUIRE(raytracer::utils::cross(r, r) == raytracer::utils::Vec3d<float>{0, 0, 0});
 }
