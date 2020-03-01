@@ -44,23 +44,46 @@ public:
      * 
      */
     Sphere() = default;
-    
-    /**
-     * @brief Get the centre of the sphere.
-     * 
-     * @return utils::Vec3d<T> The centre of the sphere.
-     */
-    utils::Vec3d<T> center() const;
 
+    /**
+     * @brief Construct a new Sphere object
+     * 
+     * @param center A point representing the center of sphere.
+     * @param radius The value of the radius of the sphere.
+     */
+    Sphere(const utils::Vec3d<T> &center, T radius);
+
+    /**
+     * @brief Get the center of the sphere.
+     * 
+     * @return utils::Vec3d<T> The center of the sphere.
+     */
+    constexpr utils::Vec3d<T> center() const;
+
+    /**
+     * @brief Get the radius of the sphere.
+     * 
+     * @return T The radius of the sphere.
+     */
+    constexpr T radius() const;
 
     bool hit(const utils::Ray3d<T> &r, T t_min, T t_max) const override;
 };
 
 template<typename T>
-utils::Vec3d<T> Sphere<T>::center() const
+Sphere<T>::Sphere(const utils::Vec3d<T> &center, T radius):
+    m_center(center),m_radius(radius)
+{}
+
+template <typename T>
+constexpr utils::Vec3d<T> Sphere<T>::center() const
 {
     return m_center;
 }
-
+template <typename T>
+constexpr T Sphere<T>::radius() const
+{
+    return m_radius;
+}
 
 } // namespace raytracer::shape
