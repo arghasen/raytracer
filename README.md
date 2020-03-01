@@ -14,3 +14,12 @@ Use best practices and produce production grade software.
 ## Continuous Integration
 CI on Travis CI and Coverage on CodeCov
 
+# Todo:
+    - Add multiple spheres.
+
+# Completed Tasks:
+    - Vector Representation
+    - Ray Representation
+    - Build a small image
+    - Add a sphere
+

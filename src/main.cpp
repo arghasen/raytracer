@@ -1,12 +1,15 @@
 #include "raytracer/vec3d.hpp"
 #include "raytracer/ray.hpp"
 #include "raytracer/color.hpp"
+#include "raytracer/shape.hpp"
 
 #include <iostream>
 
 using namespace raytracer::utils;
+using namespace raytracer::shape;
 using Vec = Vec3d<float>;
 using Ray = Ray3d<float>;
+using Sphere = Sphere3d<float>;
 constexpr auto White = color::white<float>;
 constexpr auto Black = color::black<float>;
 constexpr auto Blue = color::blue<float>;
@@ -30,6 +33,8 @@ int main(int, char **)
     std::cout << nx << " " << ny << std::endl;
     std::cout << "255" << std::endl;
 
+    Sphere s{Vec{0,0,-1},0.5};
+
     for (int j = ny - 1; j >= 0; j--)
     {
         for (int i = 0; i < nx; i++)
@@ -38,6 +43,8 @@ int main(int, char **)
             float v = float(j) / float(ny);
             Ray r{origin, lower_left_corner + horizonal * u + vertical * v};
             Vec col = getColor(r, Blue, Red);
+            if(s.hit(r, 0, 0))
+                col = Vec(0,0,0);
             std::cout << int(255 *col.x()) <<" "<< int(255 *col.y()) << " "
                       << int(255 *col.z()) << std::endl;
         }

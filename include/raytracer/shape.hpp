@@ -22,6 +22,7 @@ public:
      * @return false The ray does not hit the shape.
      */
     virtual bool hit(const utils::Ray3d<T> &r, T t_min, T t_max) const = 0;
+    virtual ~Shape() = default;
 };
 
 /**
@@ -32,7 +33,7 @@ public:
  * @tparam T 
  */
 template <typename T>
-class Sphere : public Shape<T>
+class Sphere3d : public Shape<T>
 {
 private:
     utils::Vec3d<T> m_center;
@@ -45,7 +46,7 @@ public:
      * @brief Construct a new Sphere object
      * 
      */
-    Sphere() = default;
+    Sphere3d() = default;
 
     /**
      * @brief Construct a new Sphere object
@@ -53,7 +54,9 @@ public:
      * @param center A point representing the center of sphere.
      * @param radius The value of the radius of the sphere.
      */
-    Sphere(const utils::Vec3d<T> &center, T radius);
+    Sphere3d(const utils::Vec3d<T> &center, T radius);
+
+    ~Sphere3d() override = default;
 
     /**
      * @brief Get the center of the sphere.
@@ -80,23 +83,23 @@ public:
 };
 
 template<typename T>
-Sphere<T>::Sphere(const utils::Vec3d<T> &center, T radius):
+Sphere3d<T>::Sphere3d(const utils::Vec3d<T> &center, T radius):
     m_center(center),m_radius(radius)
 {}
 
 template <typename T>
-constexpr utils::Vec3d<T> Sphere<T>::center() const
+constexpr utils::Vec3d<T> Sphere3d<T>::center() const
 {
     return m_center;
 }
 template <typename T>
-constexpr T Sphere<T>::radius() const
+constexpr T Sphere3d<T>::radius() const
 {
     return m_radius;
 }
 
 template <typename T>
-T Sphere<T>::getDiscriminant(const utils::Ray3d<T>& ray) const
+T Sphere3d<T>::getDiscriminant(const utils::Ray3d<T>& ray) const
 {
     auto originToCenter = ray.origin() - m_center; 
     T a = utils::dot(ray.direction(), ray.direction());
@@ -106,7 +109,7 @@ T Sphere<T>::getDiscriminant(const utils::Ray3d<T>& ray) const
 }
 
 template <typename T>
-bool Sphere<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
+bool Sphere3d<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
 {
     T discriminant = getDiscriminant(ray);
     if (discriminant > 0)
