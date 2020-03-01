@@ -6,14 +6,43 @@ namespace raytracer
 {
 namespace utils
 {
+
+/**
+     * @brief A class representing a Ray.
+     * 
+     * A ray is point of origin and a vector representing the direction.
+     * @tparam T 
+     */
 template <typename T>
 class Ray3d
 {
 public:
+    /**
+     * @brief Construct a new Ray 3d object
+     * 
+     */
     Ray3d() = default;
-    Ray3d(const Vec3d<T>& origin, const Vec3d<T> &direction);
 
+    /**
+     * @brief Construct a new Ray 3d object
+     * 
+     * @param origin Point of origin
+     * @param direction Direction of the ray.
+     */
+    Ray3d(const Vec3d<T> &origin, const Vec3d<T> &direction);
+
+    /**
+     * @brief Get the origin of the ray.
+     * 
+    * @return Vec3d<T> A vector representing the origin of the ray.
+    */
     Vec3d<T> origin() const;
+
+    /**
+     * @brief Direction of the ray.
+     * 
+     * @return Vec3d<T> A vector representing the direction of the ray.
+     */
     Vec3d<T> direction() const;
 
 private:
@@ -21,36 +50,24 @@ private:
     Vec3d<T> m_direction;
 };
 
-/**
- * @brief Origin of the ray.
- * 
- * @tparam T 
- * @return Vec3d<T> A vector representing the origin of the ray.
- */
-template<typename T>
+
+template <typename T>
 Vec3d<T> Ray3d<T>::origin() const
 {
     return m_origin;
 }
 
-/**
- * @brief Direction of the ray.
- * 
- * @tparam T 
- * @return Vec3d<T> A vector representing the direction of the ray.
- */
-
-template<typename T>
+template <typename T>
 Vec3d<T> Ray3d<T>::direction() const
 {
     return m_direction;
 }
 
-template<typename T>
-Ray3d<T>::Ray3d(const Vec3d<T>& origin, const Vec3d<T> &direction) : 
-    m_origin(origin),
-    m_direction(direction)
-{}
+template <typename T>
+Ray3d<T>::Ray3d(const Vec3d<T> &origin, const Vec3d<T> &direction) : m_origin(origin),
+                                                                     m_direction(direction)
+{
+}
 
-} // namespace utils    
+} // namespace utils
 } // namespace raytracer

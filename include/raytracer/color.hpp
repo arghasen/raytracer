@@ -17,6 +17,12 @@ namespace color
 
     template <typename T>
     constexpr auto black = Color3d<T>{0.0, 0.0, 0.0};
+    
+    template <typename T>
+    constexpr auto blue = Color3d<T>{0.5, 0.7, 1.0};
+
+    template <typename T>
+    constexpr auto red = Color3d<T>{1.0, 0.0, 0.0};
 };
 
 template <typename T>

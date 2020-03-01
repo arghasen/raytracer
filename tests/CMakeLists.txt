@@ -1,4 +1,9 @@
-set(TEST_SOURCES vec3d_test.cpp ray_test.cpp)
+set(TEST_SOURCES 
+    vec3d_test.cpp
+    ray_test.cpp
+    shape_test.cpp
+)
+
 add_executable(testrunner testrunner.cpp ${TEST_SOURCES})
 target_include_directories(testrunner PRIVATE 
             ${PROJECT_SOURCE_DIR}/include

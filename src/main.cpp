@@ -9,6 +9,8 @@ using Vec = Vec3d<float>;
 using Ray = Ray3d<float>;
 constexpr auto White = color::white<float>;
 constexpr auto Black = color::black<float>;
+constexpr auto Blue = color::blue<float>;
+constexpr auto Red = color::red<float>;
 
 
 int main(int, char **)
@@ -35,7 +37,7 @@ int main(int, char **)
             float u = float(i) / float(nx);
             float v = float(j) / float(ny);
             Ray r{origin, lower_left_corner + horizonal * u + vertical * v};
-            Vec col = getColor(r, White, Black);
+            Vec col = getColor(r, Blue, Red);
             std::cout << int(255 *col.x()) <<" "<< int(255 *col.y()) << " "
                       << int(255 *col.z()) << std::endl;
         }

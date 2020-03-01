@@ -12,8 +12,8 @@ TEST_CASE("create empty ray", "[Ray]")
 
 TEST_CASE("create ray with origin and direction", "[Ray]")
 {
-    auto origin = Vec3d<float>{0,0,0};
-    auto direction = Vec3d<float>{1,1,1};
+    auto origin = Vec3d<float>{1,1,1};
+    auto direction = Vec3d<float>{2,2,2};
     Ray3d<float> tr{origin, direction};
     
     REQUIRE(tr.origin() == origin);
