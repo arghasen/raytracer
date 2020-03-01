@@ -38,6 +38,8 @@ private:
     utils::Vec3d<T> m_center;
     T m_radius;
 
+    T getDiscriminant(const utils::Ray3d<T>& ray) const;
+
 public:
     /**
      * @brief Construct a new Sphere object
@@ -92,10 +94,25 @@ constexpr T Sphere<T>::radius() const
 {
     return m_radius;
 }
+
+template <typename T>
+T Sphere<T>::getDiscriminant(const utils::Ray3d<T>& ray) const
+{
+    auto originToCenter = ray.origin() - m_center; 
+    T a = utils::dot(ray.direction(), ray.direction());
+    T b = 2.0f * dot(originToCenter, ray.direction());
+    T c = dot(originToCenter, originToCenter) - m_radius*m_radius;
+    return b*b -4*a*c;
+}
+
 template <typename T>
 bool Sphere<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
 {
-    auto originToCenter = ray.origin() - m_center;
+    T discriminant = getDiscriminant(ray);
+    if (discriminant > 0)
+    {
+        return true;
+    }
     return false;
 }
 } // namespace raytracer::shape

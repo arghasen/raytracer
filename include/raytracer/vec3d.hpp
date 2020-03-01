@@ -243,6 +243,14 @@ T dot(const Vec3d<T> &v, const Vec3d<T> &u)
     return v.x() * u.x() + v.y() * u.y() + v.z() * u.z();
 }
 
+/**
+ * @brief Cross product of two vectors.
+ * 
+ * @tparam T 
+ * @param u First Vector.
+ * @param v Second Vector.
+ * @return Vec3d<T> A new vector which is the cross product of the two vectors.
+ */
 template <typename T>
 Vec3d<T> cross(const Vec3d<T> &u,const Vec3d<T> &v)
 {

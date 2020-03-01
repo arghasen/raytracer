@@ -21,10 +21,13 @@ TEST_CASE("create spheres with center and radius", "[sphere]")
     REQUIRE(sphere.radius() == radius);
 }
 
-
 TEST_CASE("hit sphere with a ray", "[sphere]")
 {
     Vec3d<float> center{0.0f, 0.0f, 0.0f};
     auto radius = 5.0f;
     Sphere<float> sphere{center, radius};
+    Ray3d<float> ray{Vec3d<float>{5,5,5},Vec3d<float>{-1, -1, -1}};
+    REQUIRE(sphere.hit(ray, 0,0) == true);
+    Ray3d<float> ray1{Vec3d<float>{5,5,5},Vec3d<float>{1, 0, 0}};
+    REQUIRE(sphere.hit(ray1, 0,0) == false);
 }
