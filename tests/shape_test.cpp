@@ -26,16 +26,17 @@ TEST_CASE("hit sphere with a ray", "[sphere]")
     Vec3d<float> center{0.0f, 0.0f, 0.0f};
     auto radius = 5.0f;
     Sphere3d<float> sphere{center, radius};
+    ShapeHitRecord3d<float> hitRecord;
     
     SECTION("Ray hit successfully")
     {
         Ray3d<float> ray{Vec3d<float>{5, 5, 5}, Vec3d<float>{-1, -1, -1}};
-        REQUIRE(sphere.hit(ray, 0, 0) == true);
+        REQUIRE(sphere.hit(ray, 0, 0, hitRecord) == true);
     }
 
     SECTION("Ray hit unsuccessfully")
     {
         Ray3d<float> ray1{Vec3d<float>{5, 5, 5}, Vec3d<float>{1, 0, 0}};
-        REQUIRE(sphere.hit(ray1, 0, 0) == false);
+        REQUIRE(sphere.hit(ray1, 0, 0, hitRecord) == false);
     }
 }

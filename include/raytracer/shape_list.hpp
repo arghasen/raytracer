@@ -27,7 +27,7 @@ public:
      */
     ShapeList3d(const std::vector<std::shared_ptr<shape::Shape<T>>>& shapes);
 
-    bool hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const override;
+    bool hit(const utils::Ray3d<T> &ray, T t_min, T t_max, shape::ShapeHitRecord3d<T>& rec) const override;
 private:
     std::vector<std::shared_ptr<shape::Shape<T>>> m_shapes;
 };
@@ -38,13 +38,13 @@ ShapeList3d<T>::ShapeList3d(const std::vector<std::shared_ptr<shape::Shape<T>>>&
 {}
 
 template <typename T>
-bool ShapeList3d<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
+bool ShapeList3d<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max, shape::ShapeHitRecord3d<T>& rec) const
 {
     bool hit = false;
     T closestSoFar = std::numeric_limits<T>::max();
     for(auto& shape : m_shapes)
     {
-        if(shape->hit(ray, t_min, t_max))
+        if(shape->hit(ray, t_min, t_max, rec))
         {
             hit = true;
         }

@@ -41,7 +41,7 @@ int main(int, char **)
     
 
     ShapeList3d<float> shapesList(shapes);
-
+    raytracer::shape::ShapeHitRecord3d<float> rec;
     for (int j = ny - 1; j >= 0; j--)
     {
         for (int i = 0; i < nx; i++)
@@ -50,7 +50,7 @@ int main(int, char **)
             float v = float(j) / float(ny);
             Ray r{origin, lower_left_corner + horizonal * u + vertical * v};
             Vec col = getColor(r, Blue, Red);
-            if(shapesList.hit(r, 0, 0))
+            if(shapesList.hit(r, 0, 0, rec))
                 col = Vec(0,0,0);
             std::cout << int(255 *col.x()) <<" "<< int(255 *col.y()) << " "
                       << int(255 *col.z()) << std::endl;

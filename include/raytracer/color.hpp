@@ -1,5 +1,6 @@
 #pragma once
 #include <raytracer/ray.hpp>
+#include <raytracer/shape_list.hpp>
 
 namespace raytracer
 {
@@ -34,5 +35,10 @@ constexpr Vec3d<T> getColor(const Ray3d<T> &r, const color::Color3d<T> & color1,
     return color1 * (1.0 - t) + color2 * t;
 }
 
+template <typename T>
+constexpr Vec3d<T> getColor(const Ray3d<T> &ray, ShapeList3d<T> &world)
+{
+
+}
 } // namespace utils
 } // namespace raytracer

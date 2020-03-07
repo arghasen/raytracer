@@ -4,6 +4,21 @@
 
 namespace raytracer::shape
 {
+
+/**
+ * @brief A record of values when a ray hits a shape.
+ * 
+ */
+template<typename T>
+struct ShapeHitRecord3d
+{
+    T t;
+    T u;
+    T v;
+    utils::Vec3d<T> p;
+    utils::Vec3d<T> normal;
+};
+
 /**
  * @brief Abstract class for all types of shapes.
  * Defines a functionality for being hit by a ray which all shapes must implement.
@@ -18,10 +33,11 @@ public:
      * @param r A ray to hit against the shape.
      * @param t_min Minimum value of the intersection point.
      * @param t_max Maximum value of the intersection point.
+     * @param rec Output parameter with the hit record.
      * @return true The ray hits the shape.
      * @return false The ray does not hit the shape.
      */
-    virtual bool hit(const utils::Ray3d<T> &r, T t_min, T t_max) const = 0;
+    virtual bool hit(const utils::Ray3d<T> &r, T t_min, T t_max, ShapeHitRecord3d<T>& rec) const = 0;
     virtual ~Shape() = default;
 };
 
@@ -79,7 +95,7 @@ public:
      */
     constexpr utils::Vec3d<T> normal()const;
 
-    bool hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const override;
+    bool hit(const utils::Ray3d<T> &ray, T t_min, T t_max, ShapeHitRecord3d<T>& rec) const override;
 };
 
 template<typename T>
@@ -109,7 +125,7 @@ T Sphere3d<T>::getDiscriminant(const utils::Ray3d<T>& ray) const
 }
 
 template <typename T>
-bool Sphere3d<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max) const
+bool Sphere3d<T>::hit(const utils::Ray3d<T> &ray, T t_min, T t_max, ShapeHitRecord3d<T>& rec) const
 {
     T discriminant = getDiscriminant(ray);
     if (discriminant > 0)
