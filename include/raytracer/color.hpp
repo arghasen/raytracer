@@ -35,7 +35,7 @@ public:
      * 
      * @return T red component of the color.
      */
-    T red()
+    T red() const
     {
         return utils::Vec3d<T>::x();
     }
@@ -45,7 +45,7 @@ public:
      * 
      * @return T green component of the color.
      */
-    T green()
+    T green() const
     {
         return utils::Vec3d<T>::y();
     }
@@ -55,7 +55,7 @@ public:
      * 
      * @return T blue component of the color.
      */
-    T blue()
+    T blue() const
     {
         return utils::Vec3d<T>::z();
     }
@@ -72,7 +72,19 @@ constexpr auto blue = Color3d<T>{0.5, 0.7, 1.0};
 
 template <typename T>
 constexpr auto red = Color3d<T>{1.0, 0.0, 0.0};
-
+/**
+ * @brief Hamadard product of 2 colors(blending)
+ * 
+ * @tparam T 
+ * @param v First Color.
+ * @param u Second Color.
+ * @return T the Hamadard product Color.
+ */
+template <typename T>
+Color3d<T> hamadard(const Color3d<T> &v, const Color3d<T> &u)
+{
+    return Color3d<T>{v.red() * u.red() , v.green() * u.green() , v.blue() * u.blue()};
+}
 
 template <typename T>
 constexpr utils::Vec3d<T> getColor(const utils::Ray3d<T> &r, const color::Color3d<T> &color1, const color::Color3d<T> &color2)
