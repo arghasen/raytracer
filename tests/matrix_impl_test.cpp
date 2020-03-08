@@ -14,7 +14,7 @@ TEST_CASE("4d matrices can be created by default", "[4dmatrix]")
     REQUIRE(m(3, 2) == Approx(0.0f));
 }
 
-TEST_CASE("4d matrices can be created", "matrix]")
+TEST_CASE("4d matrices can be created", "[matrix]")
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -68,7 +68,7 @@ TEST_CASE("Matrix equality", "[matrix]")
         {5, 6, 7, 8},
         {9, 10, 11, 12},
         {13, 14, 15, 16}};
-    
+
     REQUIRE(m == n);
 }
 
@@ -85,6 +85,38 @@ TEST_CASE("Matrix inequality", "[matrix]")
         {5, 6, 7, 8},
         {9, 10, 11, 12},
         {13, 14, 15, 16}};
-    
+
     REQUIRE(m != n);
+}
+
+TEST_CASE("Matrix multiplication", "[matrix]")
+{
+    Matrix<float> m = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 8, 7, 6},
+        {5, 4, 3, 2}};
+
+    Matrix<float> n = {
+        {-2, 1, 2, 3},
+        {3, 2, 1, -1},
+        {4, 3, 6, 5},
+        {1, 2, 7, 8}};
+    auto c = m * n;
+    CHECK(c(0, 0) == Approx(20));
+    CHECK(c(0, 1) == Approx(22));
+    CHECK(c(0, 2) == Approx(50));
+    CHECK(c(0, 3) == Approx(48));
+    CHECK(c(1, 0) == Approx(44));
+    CHECK(c(1, 1) == Approx(54));
+    CHECK(c(1, 2) == Approx(114));
+    CHECK(c(1, 3) == Approx(108));
+    CHECK(c(2, 0) == Approx(40));
+    CHECK(c(2, 1) == Approx(58));
+    CHECK(c(2, 2) == Approx(110));
+    CHECK(c(2, 3) == Approx(102));
+    CHECK(c(3, 0) == Approx(16));
+    CHECK(c(3, 1) == Approx(26));
+    CHECK(c(3, 2) == Approx(46));
+    CHECK(c(3, 3) == Approx(42));
 }
