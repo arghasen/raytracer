@@ -96,6 +96,19 @@ public:
        }
        return std::move(ret);
     }
+
+    Matrix<T,N,M> transpose()const
+    {
+        Matrix<T,N,M> ret;
+        for (size_t i = 0; i <N;i++)
+        {
+            for (size_t j =0; j < M; j++)
+            {
+                ret.set(i,j, this->operator()(j,i));
+            }
+        }
+        return std::move(ret);
+    }
 };
 
 } // namespace raytracer::transformations::detail

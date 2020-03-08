@@ -122,18 +122,40 @@ TEST_CASE("Matrix multiplication", "[matrix]")
     CHECK(c(3, 3) == Approx(42));
 }
 
-TEST_CASE("Multiply by Idenity Matrix","[matrix]")
+TEST_CASE("Multiply by Idenity Matrix", "[matrix]")
 {
     Matrix<float> A = {
         {1, 2, 3, 4},
         {5, 6, 7, 8},
         {9, 8, 7, 6},
         {5, 4, 3, 2}};
-    
-    REQUIRE(A*Identity4d<float> == A);
+
+    REQUIRE(A * Identity4d<float> == A);
 }
 
-TEST_CASE("Identity Matrix multiplication","[matrix]")
+TEST_CASE("Identity Matrix multiplication", "[matrix]")
 {
-    REQUIRE(Identity4d<float>* Identity4d<float> == Identity4d<float>);
+    REQUIRE(Identity4d<float> * Identity4d<float> == Identity4d<float>);
+}
+
+TEST_CASE("Matrix transpose", "[matrix]")
+{
+    Matrix<float> A = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 8, 7, 6},
+        {5, 4, 3, 2}};
+
+    Matrix<float> B = {
+        {1, 5, 9, 5},
+        {2, 6, 8, 4},
+        {3, 7, 7, 3},
+        {4, 8, 6, 2}};
+
+    REQUIRE(A.transpose() == B);
+}
+
+TEST_CASE("Identity transpose", "[matrix]")
+{
+    REQUIRE(Identity4d<float>.transpose() == Identity4d<float>);
 }
