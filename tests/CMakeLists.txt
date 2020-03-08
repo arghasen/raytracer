@@ -3,6 +3,7 @@ set(TEST_SOURCES
     ray_test.cpp
     shape_test.cpp
     shape_list_test.cpp
+    matrix_impl_test.cpp
 )
 
 add_executable(testrunner testrunner.cpp ${TEST_SOURCES})
