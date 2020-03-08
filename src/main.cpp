@@ -8,13 +8,14 @@
 
 using namespace raytracer::utils;
 using namespace raytracer::shape;
+using namespace raytracer::color;
 using Vec = Vec3d<float>;
 using Ray = Ray3d<float>;
 using Sphere = Sphere3d<float>;
-constexpr auto White = color::white<float>;
-constexpr auto Black = color::black<float>;
-constexpr auto Blue = color::blue<float>;
-constexpr auto Red = color::red<float>;
+constexpr auto White = white<float>;
+constexpr auto Black = black<float>;
+constexpr auto Blue = blue<float>;
+constexpr auto Red = red<float>;
 
 
 int main(int, char **)

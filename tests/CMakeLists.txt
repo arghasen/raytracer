@@ -4,6 +4,7 @@ set(TEST_SOURCES
     shape_test.cpp
     shape_list_test.cpp
     matrix_impl_test.cpp
+    color_test.cpp
 )
 
 add_executable(testrunner testrunner.cpp ${TEST_SOURCES})
