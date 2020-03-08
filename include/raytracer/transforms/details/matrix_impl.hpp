@@ -1,3 +1,4 @@
+#pragma once
 #include <array>
 
 namespace raytracer::transformations::detail
@@ -6,7 +7,7 @@ template <typename T, size_t M = 4, size_t N = 4>
 class Matrix
 {
 private:
-    std::array<std::array<T, 4>, 4> m_data;
+    std::array<std::array<T, M>, N> m_data;
 
 public:
     Matrix()
@@ -19,7 +20,7 @@ public:
         }};
     }
 
-    Matrix(std::initializer_list<std::initializer_list<T>> values)
+    Matrix(const std::initializer_list<std::initializer_list<T>> values)
     {
         int i = 0;
         for (const auto internalValue : values)

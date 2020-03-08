@@ -1,4 +1,5 @@
 #include <raytracer/transforms/details/matrix_impl.hpp>
+#include <raytracer/transforms/details/identity.hpp>
 #include <catch2/catch.hpp>
 
 using namespace raytracer::transformations::detail;
@@ -119,4 +120,20 @@ TEST_CASE("Matrix multiplication", "[matrix]")
     CHECK(c(3, 1) == Approx(26));
     CHECK(c(3, 2) == Approx(46));
     CHECK(c(3, 3) == Approx(42));
+}
+
+TEST_CASE("Multiply by Idenity Matrix","[matrix]")
+{
+    Matrix<float> A = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 8, 7, 6},
+        {5, 4, 3, 2}};
+    
+    REQUIRE(A*Identity4d<float> == A);
+}
+
+TEST_CASE("Identity Matrix multiplication","[matrix]")
+{
+    REQUIRE(Identity4d<float>* Identity4d<float> == Identity4d<float>);
 }
