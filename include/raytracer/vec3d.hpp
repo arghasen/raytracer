@@ -3,17 +3,23 @@
 #include <array>
 #include <cmath>
 #include <ostream>
+#include <limits>
 
 namespace raytracer
 {
 namespace utils
 {
 
+template <typename T>
+constexpr bool approxEquals(T lhs, T rhs, T epsilon = std::numeric_limits<T>::epsilon())
+{
+    return (std::abs(lhs - rhs) <= epsilon) ? true : false;
+}
+
 /*! \brief A 3d vector class.
  *         Provides basic functionality for creating and manipulating 3d vectors.
  *
  */
-
 template <typename T>
 class Vec3d
 {
@@ -205,13 +211,15 @@ constexpr Vec3d<T> Vec3d<T>::operator/(U f) const
 }
 
 template <typename T>
-constexpr bool Vec3d<T>::operator==(const Vec3d &u) const
+constexpr bool Vec3d<T>::operator==(const Vec3d<T> &u) const
 {
-    return this->x() == u.x() && this->y() == u.y() && this->z() == u.z();
+    return approxEquals(this->x(), u.x())
+           && approxEquals(this->y(), u.y())
+           && approxEquals(this->z(), u.z());
 }
 
 template <typename T>
-constexpr bool Vec3d<T>::operator!=(const Vec3d &u) const
+constexpr bool Vec3d<T>::operator!=(const Vec3d<T> &u) const
 {
     return !(*this == u);
 }
@@ -252,18 +260,17 @@ T dot(const Vec3d<T> &v, const Vec3d<T> &u)
  * @return Vec3d<T> A new vector which is the cross product of the two vectors.
  */
 template <typename T>
-Vec3d<T> cross(const Vec3d<T> &u,const Vec3d<T> &v)
+Vec3d<T> cross(const Vec3d<T> &u, const Vec3d<T> &v)
 {
     return Vec3d<T>{
-        (u.y()*v.z() - u.z()*v.y()),
-        (-(u.x()*v.z()-u.z()*v.x())),
-        (u.x()*v.y()-u.y()*v.x())
-    };
+        (u.y() * v.z() - u.z() * v.y()),
+        (-(u.x() * v.z() - u.z() * v.x())),
+        (u.x() * v.y() - u.y() * v.x())};
 }
-template<typename T>
-inline std::ostream& operator<<(std::ostream&os, const Vec3d<T>& t)
+template <typename T>
+inline std::ostream &operator<<(std::ostream &os, const Vec3d<T> &t)
 {
-    os<<"("<<t.x()<<", "<<t.y()<<", "<<t.z()<<")";
+    os << "(" << t.x() << ", " << t.y() << ", " << t.z() << ")";
     return os;
 }
 } // namespace utils
