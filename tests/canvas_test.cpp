@@ -5,9 +5,9 @@
 
 TEST_CASE("canvas create","[canvas]")
 {
-    raytracer::core::Canvas<raytracer::color::Color3d<float>> c(10,20); 
-    REQUIRE(c.height() == 10);
-    REQUIRE(c.width() == 20);
+    raytracer::core::Canvas<raytracer::color::Color3d<float>> c(5,6); 
+    REQUIRE(c.height() == 5);
+    REQUIRE(c.width() == 6);
     for (int i = 0; i <c.height(); i++)
     {
         for (int j = 0; j <c.width(); j++)

@@ -7,17 +7,18 @@ template <typename T, size_t M = 4, size_t N = 4>
 class Matrix
 {
 private:
-    std::array<std::array<T, M>, N> m_data;
+    std::array<std::array<T, N>, M> m_data;
 
 public:
     Matrix()
     {
-        m_data = {{
-            {{0, 0, 0, 0}},
-            {{0, 0, 0, 0}},
-            {{0, 0, 0, 0}},
-            {{0, 0, 0, 0}},
-        }};
+        for(int i = 0; i <M; i++)
+        {
+            for(int j = 0; j <N; j++)
+            {
+                m_data[i][j] = 0;
+            }
+        }
     }
 
     Matrix(const std::initializer_list<std::initializer_list<T>> values)
@@ -109,6 +110,7 @@ public:
         }
         return std::move(ret);
     }
+
 };
 
 } // namespace raytracer::transformations::detail

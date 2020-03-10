@@ -6,6 +6,7 @@ set(TEST_SOURCES
     matrix_impl_test.cpp
     color_test.cpp
     canvas_test.cpp
+    translation_test.cpp
 )
 
 add_executable(testrunner testrunner.cpp ${TEST_SOURCES})

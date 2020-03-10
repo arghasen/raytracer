@@ -122,6 +122,26 @@ TEST_CASE("Matrix multiplication", "[matrix]")
     CHECK(c(3, 3) == Approx(42));
 }
 
+TEST_CASE("Matrix multiplication2", "[matrix]")
+{
+    Matrix<float> m = {
+        {1, 2, 3, 4},
+        {5, 6, 7, 8},
+        {9, 8, 7, 6},
+        {5, 4, 3, 2}};
+
+    Matrix<float> n = {
+        {-2},
+        {3},
+        {4},
+        {1}};
+    auto c = m * n;
+    CHECK(c(0, 0) == Approx(20));
+    CHECK(c(1, 0) == Approx(44));
+    CHECK(c(2, 0) == Approx(40));
+    CHECK(c(3, 0) == Approx(16));
+}
+
 TEST_CASE("Multiply by Idenity Matrix", "[matrix]")
 {
     Matrix<float> A = {
