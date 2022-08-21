@@ -4,6 +4,6 @@
 
 namespace raytracer::transformations
 {
-template<typename T, size_t M, size_t N>
+template<typename T, std::size_t M, std::size_t N>
 using Matrix =detail::Matrix<T,M,N>;
 } // namespace raytracer::transformations

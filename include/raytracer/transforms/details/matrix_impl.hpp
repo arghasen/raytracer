@@ -1,9 +1,11 @@
 #pragma once
 #include <array>
+#include <cstddef>
+#include <stdexcept>
 
 namespace raytracer::transformations::detail
 {
-template <typename T, size_t M = 4, size_t N = 4>
+template <typename T, std::size_t M = 4, std::size_t N = 4>
 class Matrix
 {
 private:
@@ -36,22 +38,22 @@ public:
         }
     }
 
-    constexpr size_t getRows()const
+    constexpr std::size_t getRows()const
     {
         return  M;
     }
     
-    constexpr size_t getCols()const
+    constexpr std::size_t getCols()const
     {
         return  N;
     }
 
-    void set(size_t i, size_t j, T val )
+    void set(std::size_t i, std::size_t j, T val )
     {
         m_data[i][j] = val;
     }
 
-    T operator()(int i, int j) const
+    T operator()(std::size_t i, std::size_t j) const
     {
         if (i >= M || j >= N)
         {
@@ -80,15 +82,15 @@ public:
         return !(*this == m);
     }
 
-    template <size_t K>
+    template <std::size_t K>
     Matrix<T, M, K>operator*(const Matrix<T, N, K> &m ) const
     {
        Matrix<T, M, K> ret;
-       for (size_t i = 0; i < M; i++)
+       for (std::size_t i = 0; i < M; i++)
        {
-           for (size_t k = 0; k < K; k++)
+           for (std::size_t k = 0; k < K; k++)
            {
-               for(size_t j = 0; j <N; j++)
+               for(std::size_t j = 0; j <N; j++)
                {
                    auto val = ret(i,k)+ this->operator()(i,j)* m(j,k);
                    ret.set(i, k, val);
@@ -101,9 +103,9 @@ public:
     Matrix<T,N,M> transpose()const
     {
         Matrix<T,N,M> ret;
-        for (size_t i = 0; i <N;i++)
+        for (std::size_t i = 0; i <N;i++)
         {
-            for (size_t j =0; j < M; j++)
+            for (std::size_t j =0; j < M; j++)
             {
                 ret.set(i,j, this->operator()(j,i));
             }
