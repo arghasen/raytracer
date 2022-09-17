@@ -34,9 +34,10 @@
 
 # ide specific
 .vscode
+.cache
 
 # build folder
-build
+build/
 docs
 
 # images
