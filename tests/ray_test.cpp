@@ -1,37 +1,39 @@
 #include "raytracer/ray.hpp"
 
-#include <catch2/catch.hpp>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using namespace raytracer::utils;
-TEST_CASE("create empty ray", "[Ray]")
+
+TEST(rayTest, createEmptyRay)
 {
     Ray3d<float> tr;
-    REQUIRE(tr.origin() == Vec3d<float>{0,0,0});
-    REQUIRE(tr.direction() == Vec3d<float>{0,0,0});
+    EXPECT_EQ(tr.origin() ,  Vec3d<float>(0,0,0));
+    EXPECT_EQ(tr.direction(), Vec3d<float>(0, 0, 0));
 }
 
-TEST_CASE("create ray with origin and direction", "[Ray]")
+TEST(rayTest, createRayWithOriginAndDirection)
 {
-    auto origin = Vec3d<float>{1,1,1};
-    auto direction = Vec3d<float>{2,2,2};
+    auto origin = Vec3d<float>{1, 1, 1};
+    auto direction = Vec3d<float>{2, 2, 2};
     Ray3d<float> tr{origin, direction};
-    
-    REQUIRE(tr.origin() == origin);
-    REQUIRE(tr.direction() == direction);
+
+    EXPECT_EQ(tr.origin(), origin);
+    EXPECT_EQ(tr.direction(), direction);
 }
 
-TEST_CASE("parametric point","[ray]")
+TEST(rayTest, parametricPoint)
 {
-    auto origin = Vec3d<float>{1,1,1};
-    auto direction = Vec3d<float>{2,2,2};
+    auto origin = Vec3d<float>{1, 1, 1};
+    auto direction = Vec3d<float>{2, 2, 2};
     Ray3d<float> tr{origin, direction};
 
     auto c = tr.pointAtParameter(0);
-    REQUIRE(c == Vec3d<float>{1,1,1});
+    EXPECT_EQ(c, Vec3d<float>(1, 1, 1));
 
     auto d = tr.pointAtParameter(1);
-    REQUIRE(d == Vec3d<float>{3,3,3});
-    
+    EXPECT_EQ(d, Vec3d<float>(3, 3, 3));
+
     auto e = tr.pointAtParameter(2);
-    REQUIRE(e == Vec3d<float>{5,5,5});
+    EXPECT_EQ(e, Vec3d<float>(5, 5, 5));
 }

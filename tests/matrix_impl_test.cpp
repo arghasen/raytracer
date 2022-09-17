@@ -1,21 +1,25 @@
-#include <raytracer/transforms/details/matrix_impl.hpp>
 #include <raytracer/transforms/details/identity.hpp>
-#include <catch2/catch.hpp>
+#include <raytracer/transforms/details/matrix_impl.hpp>
+
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
 using namespace raytracer::transformations::detail;
-TEST_CASE("4d matrices can be created by default", "[4dmatrix]")
+using testing::FloatEq;
+
+TEST(matrixTest, A4d_matrix_can_be_created_by_default)
 {
     Matrix<float> m;
-    REQUIRE(m(0, 0) == Approx(0.0f));
-    REQUIRE(m(0, 3) == Approx(0.0f));
-    REQUIRE(m(1, 0) == Approx(0.0f));
-    REQUIRE(m(1, 2) == Approx(0.0f));
-    REQUIRE(m(2, 2) == Approx(0.0f));
-    REQUIRE(m(3, 0) == Approx(0.0f));
-    REQUIRE(m(3, 2) == Approx(0.0f));
+    EXPECT_THAT(m(0, 0), FloatEq(0.0f));
+    EXPECT_THAT(m(0, 3), FloatEq(0.0f));
+    EXPECT_THAT(m(1, 0), FloatEq(0.0f));
+    EXPECT_THAT(m(1, 2), FloatEq(0.0f));
+    EXPECT_THAT(m(2, 2), FloatEq(0.0f));
+    EXPECT_THAT(m(3, 0), FloatEq(0.0f));
+    EXPECT_THAT(m(3, 2), FloatEq(0.0f));
 }
 
-TEST_CASE("4d matrices can be created", "[matrix]")
+TEST(matrixTest, A4d_matrix_can_be_created)
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -23,40 +27,40 @@ TEST_CASE("4d matrices can be created", "[matrix]")
         {9, 10, 11, 12},
         {13.5, 14.5, 15.5, 16.5}};
 
-    REQUIRE(m(0, 0) == Approx(1.0f));
-    REQUIRE(m(0, 3) == Approx(4.0f));
-    REQUIRE(m(1, 0) == Approx(5.5f));
-    REQUIRE(m(1, 2) == Approx(7.5f));
-    REQUIRE(m(2, 2) == Approx(11.0f));
-    REQUIRE(m(3, 0) == Approx(13.5f));
-    REQUIRE(m(3, 2) == Approx(15.5f));
+    EXPECT_THAT(m(0, 0), FloatEq(1.0f));
+    EXPECT_THAT(m(0, 3), FloatEq(4.0f));
+    EXPECT_THAT(m(1, 0), FloatEq(5.5f));
+    EXPECT_THAT(m(1, 2), FloatEq(7.5f));
+    EXPECT_THAT(m(2, 2), FloatEq(11.0f));
+    EXPECT_THAT(m(3, 0), FloatEq(13.5f));
+    EXPECT_THAT(m(3, 2), FloatEq(15.5f));
 }
 
-TEST_CASE("2d matrices are representable", "[matrix]")
+TEST(matrixTest, A2d_matrix_is_representable)
 {
     Matrix<float, 2, 2> m = {
         {-3, 5},
         {1, -2}};
 
-    REQUIRE(m(0, 0) == Approx(-3));
-    REQUIRE(m(0, 1) == Approx(5));
-    REQUIRE(m(1, 0) == Approx(1));
-    REQUIRE(m(1, 1) == Approx(-2));
+    EXPECT_THAT(m(0, 0), FloatEq(-3));
+    EXPECT_THAT(m(0, 1), FloatEq(5));
+    EXPECT_THAT(m(1, 0), FloatEq(1));
+    EXPECT_THAT(m(1, 1), FloatEq(-2));
 }
 
-TEST_CASE("3d matrices are representable", "[matrix]")
+TEST(matrixTest, A3d_matrix_is_representable)
 {
     Matrix<float, 3, 3> m = {
         {-3, 5, 0},
         {1, -2, -7},
         {0, 1, 1}};
 
-    REQUIRE(m(0, 0) == Approx(-3));
-    REQUIRE(m(1, 1) == Approx(-2));
-    REQUIRE(m(2, 2) == Approx(1));
+    EXPECT_THAT(m(0, 0), FloatEq(-3));
+    EXPECT_THAT(m(1, 1), FloatEq(-2));
+    EXPECT_THAT(m(2, 2), FloatEq(1));
 }
 
-TEST_CASE("Matrix equality", "[matrix]")
+TEST(matrixTest, MatrixEquality)
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -70,10 +74,10 @@ TEST_CASE("Matrix equality", "[matrix]")
         {9, 10, 11, 12},
         {13, 14, 15, 16}};
 
-    REQUIRE(m == n);
+    EXPECT_EQ(m, n);
 }
 
-TEST_CASE("Matrix inequality", "[matrix]")
+TEST(matrixTest, MatrixInequality)
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -87,10 +91,10 @@ TEST_CASE("Matrix inequality", "[matrix]")
         {9, 10, 11, 12},
         {13, 14, 15, 16}};
 
-    REQUIRE(m != n);
+    EXPECT_NE(m, n);
 }
 
-TEST_CASE("Matrix multiplication", "[matrix]")
+TEST(matrixTest, MatrixMultiplication)
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -104,25 +108,25 @@ TEST_CASE("Matrix multiplication", "[matrix]")
         {4, 3, 6, 5},
         {1, 2, 7, 8}};
     auto c = m * n;
-    CHECK(c(0, 0) == Approx(20));
-    CHECK(c(0, 1) == Approx(22));
-    CHECK(c(0, 2) == Approx(50));
-    CHECK(c(0, 3) == Approx(48));
-    CHECK(c(1, 0) == Approx(44));
-    CHECK(c(1, 1) == Approx(54));
-    CHECK(c(1, 2) == Approx(114));
-    CHECK(c(1, 3) == Approx(108));
-    CHECK(c(2, 0) == Approx(40));
-    CHECK(c(2, 1) == Approx(58));
-    CHECK(c(2, 2) == Approx(110));
-    CHECK(c(2, 3) == Approx(102));
-    CHECK(c(3, 0) == Approx(16));
-    CHECK(c(3, 1) == Approx(26));
-    CHECK(c(3, 2) == Approx(46));
-    CHECK(c(3, 3) == Approx(42));
+    EXPECT_THAT(c(0, 0), FloatEq(20));
+    EXPECT_THAT(c(0, 1), FloatEq(22));
+    EXPECT_THAT(c(0, 2), FloatEq(50));
+    EXPECT_THAT(c(0, 3), FloatEq(48));
+    EXPECT_THAT(c(1, 0), FloatEq(44));
+    EXPECT_THAT(c(1, 1), FloatEq(54));
+    EXPECT_THAT(c(1, 2), FloatEq(114));
+    EXPECT_THAT(c(1, 3), FloatEq(108));
+    EXPECT_THAT(c(2, 0), FloatEq(40));
+    EXPECT_THAT(c(2, 1), FloatEq(58));
+    EXPECT_THAT(c(2, 2), FloatEq(110));
+    EXPECT_THAT(c(2, 3), FloatEq(102));
+    EXPECT_THAT(c(3, 0), FloatEq(16));
+    EXPECT_THAT(c(3, 1), FloatEq(26));
+    EXPECT_THAT(c(3, 2), FloatEq(46));
+    EXPECT_THAT(c(3, 3), FloatEq(42));
 }
 
-TEST_CASE("Matrix multiplication2", "[matrix]")
+TEST(matrixTest, MatrixMultiplication2)
 {
     Matrix<float> m = {
         {1, 2, 3, 4},
@@ -136,13 +140,13 @@ TEST_CASE("Matrix multiplication2", "[matrix]")
         {4},
         {1}};
     auto c = m * n;
-    CHECK(c(0, 0) == Approx(20));
-    CHECK(c(1, 0) == Approx(44));
-    CHECK(c(2, 0) == Approx(40));
-    CHECK(c(3, 0) == Approx(16));
+    EXPECT_THAT(c(0, 0), FloatEq(20));
+    EXPECT_THAT(c(1, 0), FloatEq(44));
+    EXPECT_THAT(c(2, 0), FloatEq(40));
+    EXPECT_THAT(c(3, 0), FloatEq(16));
 }
 
-TEST_CASE("Multiply by Idenity Matrix", "[matrix]")
+TEST(matrixTest, MultiplybyIdenityMatrix)
 {
     Matrix<float> A = {
         {1, 2, 3, 4},
@@ -150,15 +154,15 @@ TEST_CASE("Multiply by Idenity Matrix", "[matrix]")
         {9, 8, 7, 6},
         {5, 4, 3, 2}};
 
-    REQUIRE(A * Identity4d<float> == A);
+    EXPECT_THAT(A * Identity4d<float>, A);
 }
 
-TEST_CASE("Identity Matrix multiplication", "[matrix]")
+TEST(matrixTest, IdentityMatrixMultiplication)
 {
-    REQUIRE(Identity4d<float> * Identity4d<float> == Identity4d<float>);
+    EXPECT_THAT(Identity4d<float> * Identity4d<float>, Identity4d<float>);
 }
 
-TEST_CASE("Matrix transpose", "[matrix]")
+TEST(matrixTest, MatrixTranspose)
 {
     Matrix<float> A = {
         {1, 2, 3, 4},
@@ -172,10 +176,10 @@ TEST_CASE("Matrix transpose", "[matrix]")
         {3, 7, 7, 3},
         {4, 8, 6, 2}};
 
-    REQUIRE(A.transpose() == B);
+    EXPECT_THAT(A.transpose(), B);
 }
 
-TEST_CASE("Identity transpose", "[matrix]")
+TEST(matrixTest, IdentityTranspose)
 {
-    REQUIRE(Identity4d<float>.transpose() == Identity4d<float>);
+    EXPECT_THAT(Identity4d<float>.transpose(), Identity4d<float>);
 }

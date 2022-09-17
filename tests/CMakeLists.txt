@@ -1,12 +1,12 @@
 set(TEST_SOURCES 
     #vec3d_test.cpp
-    #ray_test.cpp
+    ray_test.cpp
     #shape_test.cpp
-    #shape_list_test.cpp
-    #matrix_impl_test.cpp
+    shape_list_test.cpp
+    matrix_impl_test.cpp
     color_test.cpp
     canvas_test.cpp
-    #translation_test.cpp
+    translation_test.cpp
 )
 
 enable_testing()
