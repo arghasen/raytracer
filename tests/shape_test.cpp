@@ -1,42 +1,53 @@
 #include "raytracer/shape.hpp"
-#include <catch2/catch.hpp>
 
-using namespace raytracer::utils;
-using namespace raytracer::shape;
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
 
-TEST_CASE("create spheres", "[sphere]")
+namespace raytracer::test
 {
-    Sphere3d<float> sphere;
-    REQUIRE(sphere.center() == Vec3d<float>(0.0f, 0.0f, 0.0f));
-    REQUIRE(sphere.radius() == Approx(0.0f));
-}
 
-TEST_CASE("create spheres with center and radius", "[sphere]")
-{
-    Vec3d<float> center{0.0f, 0.0f, 0.0f};
-    auto radius = 5.0f;
-    Sphere3d<float> sphere{center, radius};
+    using namespace raytracer::utils;
+    using namespace raytracer::shape;
 
-    REQUIRE(sphere.center() == center);
-    REQUIRE(sphere.radius() == radius);
-}
+    using testing::Eq;
+    using testing::FloatEq;
 
-TEST_CASE("hit sphere with a ray", "[sphere]")
-{
-    Vec3d<float> center{0.0f, 0.0f, 0.0f};
-    auto radius = 5.0f;
-    Sphere3d<float> sphere{center, radius};
-    ShapeHitRecord3d<float> hitRecord;
-    
-    SECTION("Ray hit successfully")
+    TEST(sphereTest, createSpheres)
+    {
+        Sphere3d<float> sphere;
+        EXPECT_THAT(sphere.center(), Eq(Vec3d<float>(0.0f, 0.0f, 0.0f)));
+        EXPECT_THAT(sphere.radius(), FloatEq(0.0f));
+    }
+
+    TEST(sphereTest, createSpheresWithCenterAndRadius)
+    {
+        Vec3d<float> center{0.0f, 0.0f, 0.0f};
+        auto radius = 5.0f;
+        Sphere3d<float> sphere{center, radius};
+
+        EXPECT_EQ(sphere.center(), center);
+        EXPECT_EQ(sphere.radius(), radius);
+    }
+
+    struct SphereRayTest : public testing::Test
+    {
+        SphereRayTest() : center(0.0f, 0.0f, 0.0f), radius(5.0f), sphere(center, radius) {}
+
+        Vec3d<float> center;
+        float radius;
+        Sphere3d<float> sphere;
+        ShapeHitRecord3d<float> hitRecord;
+    };
+
+    TEST_F(SphereRayTest, hitSphereWithRaySuccess)
     {
         Ray3d<float> ray{Vec3d<float>{5, 5, 5}, Vec3d<float>{-1, -1, -1}};
-        REQUIRE(sphere.hit(ray, 0, 0, hitRecord) == true);
+        EXPECT_TRUE(sphere.hit(ray, 0, 0, hitRecord));
     }
 
-    SECTION("Ray hit unsuccessfully")
+    TEST_F(SphereRayTest, hitSphereWithRayFail)
     {
         Ray3d<float> ray1{Vec3d<float>{5, 5, 5}, Vec3d<float>{1, 0, 0}};
-        REQUIRE(sphere.hit(ray1, 0, 0, hitRecord) == false);
+        EXPECT_FALSE(sphere.hit(ray1, 0, 0, hitRecord));
     }
-}
+} // namespace raytracer::test

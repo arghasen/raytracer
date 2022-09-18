@@ -8,7 +8,7 @@ using namespace raytracer::utils;
 TEST(rayTest, createEmptyRay)
 {
     Ray3d<float> tr;
-    EXPECT_EQ(tr.origin() ,  Vec3d<float>(0,0,0));
+    EXPECT_EQ(tr.origin(), Vec3d<float>(0, 0, 0));
     EXPECT_EQ(tr.direction(), Vec3d<float>(0, 0, 0));
 }
 
